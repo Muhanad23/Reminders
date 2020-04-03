@@ -61,7 +61,7 @@ public class RemindersDbAdapter {
         imp=1;
     else
         imp=0;
-    String queryStr="INSERT INTO "+TABLE_NAME+" ("+COL_CONTENT+","+COL_IMPORTANT+") VALUES ("+name+","+imp+");";
+    String queryStr="INSERT INTO "+TABLE_NAME+" ("+COL_CONTENT+","+COL_IMPORTANT+") VALUES (\""+name+"\","+imp+");";
     db.execSQL(queryStr);
     }
     //TODO overloaded to take a reminder
@@ -96,7 +96,7 @@ public class RemindersDbAdapter {
     //TODO implement the function updateReminder() to update a certain reminder
     public void updateReminder(Reminder reminder) {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        String queryStr= "UPDATE "+TABLE_NAME+" SET "+COL_CONTENT+" = "+reminder.getContent()+" "+COL_IMPORTANT+" = "+reminder.getImportant()+" WHERE "+COL_ID+" = "+reminder.getId()+";";
+        String queryStr=  "UPDATE "+TABLE_NAME+" SET "+COL_CONTENT+" = \""+reminder.getContent()+"\" "+COL_IMPORTANT+" = "+reminder.getImportant()+" WHERE "+COL_ID+" = "+reminder.getId()+";";
         db.execSQL(queryStr);
     }
     //TODO implement the function deleteReminderById() to delete a certain reminder given its id
