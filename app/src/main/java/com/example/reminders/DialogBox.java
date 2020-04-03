@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 public class DialogBox extends AppCompatDialogFragment {
+    private RemindersDbAdapter myDB;
     private EditText reminderMsg;
     private CheckBox isImportant;
     private TextView addEditTitle;
@@ -20,7 +21,8 @@ public class DialogBox extends AppCompatDialogFragment {
     private Button cancel;
     private String title;
 
-    public DialogBox(int val){
+    public DialogBox(int val,RemindersDbAdapter myDB){
+        this.myDB = myDB;
         // If val == 0 then it's an add reminder else it contains the id of the reminder to be edited
         if (val == 0)
             title = " New Reminder";
@@ -50,6 +52,8 @@ public class DialogBox extends AppCompatDialogFragment {
             @Override
             public void onClick(View v) {
                 // TODO: add the reminder to db
+                myDB.createReminder(reminderMsg.getText().toString(),isImportant.isChecked());
+
                 getDialog().dismiss();
             }
         });
