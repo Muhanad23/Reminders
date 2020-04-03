@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         myDB=new RemindersDbAdapter(this);
+        myDB.open();
+
     }
 
     @Override
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.exit_app:
+                myDB.close();
                 finish();
                 System.exit(0);
         }
