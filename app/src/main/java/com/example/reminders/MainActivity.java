@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         myDB=new RemindersDbAdapter(this);
         myDB.open();
-
     }
 
     @Override
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void openNewDialog(){
-        DialogBox dialog = new DialogBox(0);
+        DialogBox dialog = new DialogBox(0,myDB);
         dialog.show(getSupportFragmentManager(),"New reminder");
     }
 }
