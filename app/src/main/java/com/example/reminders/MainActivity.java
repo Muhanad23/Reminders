@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void openNewDialog(){
-        DialogBox dialog = new DialogBox(" New Reminder");
+        DialogBox dialog = new DialogBox(0);
         dialog.show(getSupportFragmentManager(),"New reminder");
     }
 }
