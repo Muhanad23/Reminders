@@ -1,13 +1,14 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
+    android:layout_width="300dp"
     android:layout_height="wrap_content"
-    android:background="#646464"
+    android:background="#242635"
     android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="58dp"
-        android:background="#97103D"
+        android:layout_height="wrap_content"
+        android:id="@+id/addEditTitle"
+        android:background="#1B1E2B"
         android:contentDescription="@string/app_name"
         android:scaleType="center"
         android:text="   Add:"
@@ -17,7 +18,7 @@
     <EditText
         android:id="@+id/add_edit_remainder"
         android:layout_width="match_parent"
-        android:layout_height="233dp"
+        android:layout_height="195dp"
         android:layout_marginLeft="4dp"
         android:layout_marginTop="16dp"
         android:layout_marginRight="4dp"
@@ -29,21 +30,29 @@
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="43dp"
+        android:buttonTint="#FFFFFF"
         android:text="Important"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#FFFFFF"
         android:textSize="24sp" />
 
-    <LinearLayout
-        android:orientation="horizontal">
+    <LinearLayout android:orientation="horizontal"
+        android:layout_width="fill_parent">
 
         <Button
-            android:layout_width="178dp"
+            android:id="@+id/cancel_button"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="CANCLE"
+            android:text="CANCEL"
+            android:layout_marginRight="2dp"
             android:textSize="24sp" />
 
         <Button
-            android:layout_width="171dp"
+            android:id="@+id/commit_button"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:text="COMMIT"

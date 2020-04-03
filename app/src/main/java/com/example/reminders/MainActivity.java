@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,11 +28,16 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch(item.getItemId()){
             case R.id.new_reminder:
-                // TODO: on click new reminder button
+                openNewDialog();
+                break;
             case R.id.exit_app:
                 finish();
                 System.exit(0);
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void openNewDialog(){
+        DialogBox dialog = new DialogBox(" New Reminder");
+        dialog.show(getSupportFragmentManager(),"New reminder");
     }
 }
