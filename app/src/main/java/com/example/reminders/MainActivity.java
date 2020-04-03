@@ -10,11 +10,12 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-
+    RemindersDbAdapter myDB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        myDB=new RemindersDbAdapter(this);
     }
 
     @Override
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.new_reminder:
                 openNewDialog();
+
                 break;
             case R.id.exit_app:
                 finish();
