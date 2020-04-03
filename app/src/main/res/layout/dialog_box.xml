@@ -1,0 +1,53 @@
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:background="#646464"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="#97103D"
+        android:contentDescription="@string/app_name"
+        android:scaleType="center"
+        android:text="   Add:"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp" />
+
+    <EditText
+        android:id="@+id/add_edit_remainder"
+        android:layout_width="match_parent"
+        android:layout_height="233dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:lines="8"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Important"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="178dp"
+            android:layout_height="wrap_content"
+            android:text="CANCLE"
+            android:textSize="24sp" />
+
+        <Button
+            android:layout_width="171dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:text="COMMIT"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</GridLayout>
