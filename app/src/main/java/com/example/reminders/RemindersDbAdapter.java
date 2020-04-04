@@ -81,7 +81,8 @@ public class RemindersDbAdapter {
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
         String queryStr= "SELECT * FROM "+TABLE_NAME+" WHERE "+COL_ID+" = "+id+";";
         Cursor remind= db.rawQuery(queryStr,null);
-        Reminder a=new Reminder(id,remind.getString(id+1),remind.getInt(id+2));
+        remind.moveToFirst();
+        Reminder a=new Reminder(remind.getInt(remind.getColumnIndex(RemindersDbAdapter.COL_ID)),remind.getString(remind.getColumnIndex(RemindersDbAdapter.COL_CONTENT)),remind.getInt(remind.getColumnIndex(RemindersDbAdapter.COL_IMPORTANT)));
         return a;
     }
 
@@ -97,7 +98,7 @@ public class RemindersDbAdapter {
     //TODO implement the function updateReminder() to update a certain reminder
     public void updateReminder(Reminder reminder) {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        String queryStr=  "UPDATE "+TABLE_NAME+" SET "+COL_CONTENT+" = \""+reminder.getContent()+"\" "+COL_IMPORTANT+" = "+reminder.getImportant()+" WHERE "+COL_ID+" = "+reminder.getId()+";";
+        String queryStr=  "UPDATE "+TABLE_NAME+" SET "+COL_CONTENT+" = \""+reminder.getContent()+"\" ,"+COL_IMPORTANT+" = "+reminder.getImportant()+" WHERE "+COL_ID+" = "+reminder.getId()+";";
         db.execSQL(queryStr);
     }
     //TODO implement the function deleteReminderById() to delete a certain reminder given its id

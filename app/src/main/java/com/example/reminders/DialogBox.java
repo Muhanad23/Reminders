@@ -1,5 +1,6 @@
 package com.example.reminders;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -8,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDialogFragment;
 
@@ -20,16 +23,22 @@ public class DialogBox extends AppCompatDialogFragment {
     private Button commit;
     private Button cancel;
     private String title;
+    private Reminder reminder;
+    private RemindersSimpleCursorAdapter adapter;
+    private ListView listView;
 
-    public DialogBox(int val,RemindersDbAdapter myDB){
+    public DialogBox(RemindersDbAdapter myDB, Reminder reminder, RemindersSimpleCursorAdapter adapter, ListView listview){
         this.myDB = myDB;
-        // If val == 0 then it's an add reminder else it contains the id of the reminder to be edited
-        if (val == 0)
-            title = " New Reminder";
-        else {
+        this.adapter=adapter;
+        this.listView=listview;
+        // If reminder == null then it's new reminder
+        if (reminder == null)
+            title=" New Reminder";
+        else
             title = " Edit Reminder";
-        }
+        this.reminder = reminder;
     }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -41,6 +50,12 @@ public class DialogBox extends AppCompatDialogFragment {
         addEditTitle = view.findViewById(R.id.addEditTitle);
         cancel = view.findViewById(R.id.cancel_button);
         commit = view.findViewById(R.id.commit_button);
+        // Put content into editText if edit
+        if (reminder != null) {
+            reminderMsg.setText(reminder.getContent());
+            boolean myBool = reminder.getImportant() > 0 ? true:false;
+            isImportant.setChecked(myBool);
+        }
         addEditTitle.setText(title);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,12 +66,29 @@ public class DialogBox extends AppCompatDialogFragment {
         commit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: add the reminder to db
-                myDB.createReminder(reminderMsg.getText().toString(),isImportant.isChecked());
+                // If reminder == null then it's add
+                if (reminder == null){
+                    myDB.createReminder(reminderMsg.getText().toString(),isImportant.isChecked());
+                    updateList();
+                    Toast.makeText(getActivity().getApplicationContext(),"Reminder added successfully!",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    reminder.setContent(reminderMsg.getText().toString());
+                    int myInt = isImportant.isChecked() ? 1 : 0;
+                    reminder.setImportant(myInt);
+                    myDB.updateReminder(reminder);
+                    updateList();
+                    Toast.makeText(getActivity().getApplicationContext(),"Reminder updated successfully!",Toast.LENGTH_SHORT).show();
 
+                }
                 getDialog().dismiss();
             }
         });
         return builder.create();
+    }
+
+    public void updateList() {
+        adapter.changeCursor(myDB.fetchAllReminders());
+        listView.setAdapter(adapter);
     }
 }
